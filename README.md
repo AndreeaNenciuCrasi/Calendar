@@ -94,6 +94,7 @@ Milestone 4: More features
 It should be possible to edit a meeting (change title, duration, or time). Make sure to check if the new meeting time is validated.
 The program should display the total meeting duration (how many hours of meetings).
 There should be a "compact meetings" feature that moves meetings to earliest possible time (starting from 8). For instance, if we have a schedule like this:
+
  9 - 10 Meeting A
  
 12 - 13 Meeting B
