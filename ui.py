@@ -17,11 +17,6 @@ def get_inputs(list_labels, title):
     Sample call:
         get_inputs(["Name","Surname","Age"],
                     "Please provide your personal information")
-    Sample display:
-        Please provide your personal information
-        Name <user_input_1>
-        Surname <user_input_2>
-        Age <user_input_3>
 
     Args:
         list_labels (list): labels of inputs
@@ -41,14 +36,22 @@ def get_inputs(list_labels, title):
 
 
 def print_error_message(message):
-    """
-    Displays an error message (example: ``Error: @message``)
-
-    Args:
-        message (str): error message to be displayed
-
-    Returns:
-        None: This function doesn't return anything it only prints to console.
-    """
-
     print(f'Error - {message}')
+
+
+def print_message(message):
+    print(f"{message}  \n")
+
+
+def print_schedule(meetings_dictionary):
+    print('\n Your schedule for the day: ')
+    count = 0
+    for key, value in meetings_dictionary.items():
+        if value != '':
+            print(' ' + key + ' - ' + str(int(key)+1) + ' : ' + value)
+        else:
+            count += 1
+
+    if count == len(meetings_dictionary):
+        print(' (emty)')
+    print('\n')
