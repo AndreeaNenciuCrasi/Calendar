@@ -86,16 +86,25 @@ Now, make the program store the schedule in a file (meetings.txt). The program s
 For instance, the schedule above could be stored like this:
 
 12,13,Lunch
+
 13,15,Meeting with Piotr
+
 Milestone 4: More features
+
 It should be possible to edit a meeting (change title, duration, or time). Make sure to check if the new meeting time is validated.
 The program should display the total meeting duration (how many hours of meetings).
 There should be a "compact meetings" feature that moves meetings to earliest possible time (starting from 8). For instance, if we have a schedule like this:
  9 - 10 Meeting A
+ 
 12 - 13 Meeting B
+
 13 - 15 Meeting C
 
 Then, after compacting, it should be changed to:
+
  8 -  9 Meeting A
+ 
  9 - 10 Meeting B
+ 
 10 - 12 Meeting C
+
