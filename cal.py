@@ -1,13 +1,13 @@
 # main program
 import sys
 import ui
+import storage
 
 meetings_dic = {'8': '', '9': '', '10': '', '11': '', '12': '', '13': '', '14': '', '15': '', '16': '',
                 '17': '', '18': ''}
 
 
-def schedule_meeting():
-    global meetings_dic
+def schedule_meeting(meetings_dic):
     input_title = ui.get_inputs(["Enter meeting title: "], "")
     input_duration = ui.get_inputs(["Enter duration in hours (1 or 2): "], "")
 
@@ -37,8 +37,7 @@ def schedule_meeting():
             meetings_dic[str(int(i) + 1)] = input_title[0]
 
 
-def cancel_meeting():
-    global meetings_dic
+def cancel_meeting(meetings_dic):
     inputs = ui.get_inputs(
         ["Enter start time: "], "")
     for i in meetings_dic.keys():
@@ -51,47 +50,25 @@ def cancel_meeting():
                 inputs = ui.get_inputs(["Enter start time: "], "")
 
 
-def export_schedule(meetings_dic):
-    schedule = []
-    count = 0
-    for key, value in meetings_dic.items():
-        if value != '':
-            schedule.append(' ' + key + ' - ' +
-                            str(int(key)+1) + ' : ' + value)
-            file = open('meetings.txt', "w")
-            file.write("Your schedule for the day:\n")
-            for result in schedule:
-                file.writelines(result)
-                file.write("\n")
-        else:
-            count += 1
-
-    if count == len(meetings_dic):
-        file = open('meetings.txt', "w")
-        file.write("Your schedule for the day:\n")
-        file.write('empty')
-
-
 def choose():
-    global meetings_dic
     inputs = ui.get_inputs(["Please enter an option: "], "")
     option = inputs[0]
-    ui.print_schedule(meetings_dic)
+
     if option == "s":
+        ui.print_schedule(meetings_dic)
         ui.print_message(' Schedule a new meeting.')
-        schedule_meeting()
+        schedule_meeting(meetings_dic)
         ui.print_message(' Meeting added.')
         print(meetings_dic)
-        ui.print_schedule(meetings_dic)
     elif option == "c":
+        ui.print_schedule(meetings_dic)
         ui.print_message(' Cancel an existing meeting.')
-        cancel_meeting()
+        cancel_meeting(meetings_dic)
         ui.print_message(' Meeting canceled.')
         print(meetings_dic)
     elif option == "S":
-        export_schedule(meetings_dic)
-        ui.print_message(' Exported schedule')
-        print(meetings_dic)
+        storage.export_schedule(meetings_dic)
+        ui.print_message('\n Exported schedule')
     elif option == "q":
         sys.exit(0)
     else:

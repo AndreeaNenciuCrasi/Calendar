@@ -17,11 +17,6 @@ def get_inputs(list_labels, title):
     Sample call:
         get_inputs(["Name","Surname","Age"],
                     "Please provide your personal information")
-
-    Args:
-        list_labels (list): labels of inputs
-        title (string): title of the "input section"
-
     Returns:
         list: List of data given by the user. Sample return:
             [<user_input_1>, <user_input_2>, <user_input_3>]
@@ -46,12 +41,15 @@ def print_message(message):
 def print_schedule(meetings_dictionary):
     print('\n Your schedule for the day: ')
     count = 0
+    count_hours = 0
     for key, value in meetings_dictionary.items():
         if value != '':
-            print(' ' + key + ' - ' + str(int(key)+1) + ' : ' + value)
+            print(' ' + key + ' - ' + str(int(key) + 1) + ' : ' + value)
+            count_hours += 1
         else:
             count += 1
-
+    if count_hours != 0:
+        print(f'You have {count_hours} meetings today')
     if count == len(meetings_dictionary):
         print(' (emty)')
     print('\n')
