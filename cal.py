@@ -51,6 +51,27 @@ def cancel_meeting():
                 inputs = ui.get_inputs(["Enter start time: "], "")
 
 
+def export_schedule(meetings_dic):
+    schedule = []
+    count = 0
+    for key, value in meetings_dic.items():
+        if value != '':
+            schedule.append(' ' + key + ' - ' +
+                            str(int(key)+1) + ' : ' + value)
+            file = open('meetings.txt', "w")
+            file.write("Your schedule for the day:\n")
+            for result in schedule:
+                file.writelines(result)
+                file.write("\n")
+        else:
+            count += 1
+
+    if count == len(meetings_dic):
+        file = open('meetings.txt', "w")
+        file.write("Your schedule for the day:\n")
+        file.write('empty')
+
+
 def choose():
     global meetings_dic
     inputs = ui.get_inputs(["Please enter an option: "], "")
@@ -67,6 +88,10 @@ def choose():
         cancel_meeting()
         ui.print_message(' Meeting canceled.')
         print(meetings_dic)
+    elif option == "S":
+        export_schedule(meetings_dic)
+        ui.print_message(' Exported schedule')
+        print(meetings_dic)
     elif option == "q":
         sys.exit(0)
     else:
@@ -76,6 +101,7 @@ def choose():
 def handle_menu():
     options = ["schedule a new meeting",
                "cancel an existing meeting",
+               "Save and load",
                "quit"]
 
     ui.print_menu("Main menu", options, "quit")
