@@ -50,6 +50,27 @@ def cancel_meeting(meetings_dic):
                 inputs = ui.get_inputs(["Enter start time: "], "")
 
 
+def change_meeting(meetings_dic):
+    input_time = ui.get_inputs(
+        ["Enter start time: "], "")
+    while int(input_time[0]) < 8 or int(input_time[0]) > 18:
+        ui.print_error_message(
+            'Meeting is outside of your working hours (8 to 18)!')
+        input_time = ui.get_inputs(
+            ["Enter start time: "], "")
+
+    inputs = ui.get_inputs(
+        ["Enter meeting title: ", "Enter duration in hours (1 or 2): ", "Enter start time: "], "")
+    if input_time[0] == inputs[2]:
+        for i in meetings_dic.keys():
+            if input_time[0] == i and inputs[1] == '1':
+                meetings_dic[i] = inputs[0]
+
+            elif input_time[0] == i and inputs[1] == '2':
+                meetings_dic[i] = inputs[0]
+                meetings_dic[str(int(i) + 1)] = inputs[0]
+
+
 def choose():
     inputs = ui.get_inputs(["Please enter an option: "], "")
     option = inputs[0]
@@ -66,9 +87,13 @@ def choose():
         cancel_meeting(meetings_dic)
         ui.print_message(' Meeting canceled.')
         print(meetings_dic)
-    elif option == "S":
+    elif option == "L":
         storage.export_schedule(meetings_dic)
         ui.print_message('\n Exported schedule')
+    elif option == "M":
+        ui.print_schedule(meetings_dic)
+        change_meeting(meetings_dic)
+        ui.print_message('\n Changed meeting')
     elif option == "q":
         sys.exit(0)
     else:
@@ -79,6 +104,7 @@ def handle_menu():
     options = ["schedule a new meeting",
                "cancel an existing meeting",
                "Save and load",
+               "Change meeting",
                "quit"]
 
     ui.print_menu("Main menu", options, "quit")

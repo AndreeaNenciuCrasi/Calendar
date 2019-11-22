@@ -1,5 +1,5 @@
 Your schedule for the day:
- 12 - 13 : wwwwwwwww
- 13 - 14 : wwwwwwwww
- 15 - 16 : eeeeeeeeeeee
- 16 - 17 : eeeeeeeeeeee
+ 12 - 13 : wwwwwwwwww
+ 13 - 14 : aaaaaaaaaa
+ 14 - 15 : aaaaaaaaaa
+ 15 - 16 : eeeeeeeeeee
