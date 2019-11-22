@@ -3,7 +3,7 @@
 
 def print_menu(title, list_options, exit_message):
     print(f'    {title}')
-    letter_list = ['s', 'c', 'L', 'M', 'q']
+    letter_list = ['s', 'c', 'L', 'M', 'z', 'q']
     i = 1
     while i < len(list_options):
         print(f'        ({letter_list[i-1]}) {list_options[i-1]}')

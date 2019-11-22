@@ -35,6 +35,7 @@ def schedule_meeting(meetings_dic):
         elif input_time[0] == i and input_duration[0] == '2':
             meetings_dic[i] = input_title[0]
             meetings_dic[str(int(i) + 1)] = input_title[0]
+    return meetings_dic
 
 
 def cancel_meeting(meetings_dic):
@@ -48,6 +49,7 @@ def cancel_meeting(meetings_dic):
                 ui.print_error_message(
                     'There is no meeting starting at that time!')
                 inputs = ui.get_inputs(["Enter start time: "], "")
+    return meetings_dic
 
 
 def change_meeting(meetings_dic):
@@ -58,6 +60,7 @@ def change_meeting(meetings_dic):
             'Meeting is outside of your working hours (8 to 18)!')
         input_time = ui.get_inputs(
             ["Enter start time: "], "")
+    return meetings_dic
 
     inputs = ui.get_inputs(
         ["Enter meeting title: ", "Enter duration in hours (1 or 2): ", "Enter start time: "], "")
@@ -69,6 +72,19 @@ def change_meeting(meetings_dic):
             elif input_time[0] == i and inputs[1] == '2':
                 meetings_dic[i] = inputs[0]
                 meetings_dic[str(int(i) + 1)] = inputs[0]
+
+
+def compact_meetings(meetings_dic):
+    schedule = []
+    for key, value in meetings_dic.items():
+        if value != '':
+            schedule.append(value)
+            meetings_dic[key] = ''
+    i = 0
+    while i < len(schedule):
+        meetings_dic[str(i+8)] = schedule[i]
+        i += 1
+    return meetings_dic
 
 
 def choose():
@@ -94,6 +110,10 @@ def choose():
         ui.print_schedule(meetings_dic)
         change_meeting(meetings_dic)
         ui.print_message('\n Changed meeting')
+    elif option == "z":
+        compact_meetings(meetings_dic)
+        ui.print_message('\n Compact meetings')
+        ui.print_schedule(meetings_dic)
     elif option == "q":
         sys.exit(0)
     else:
@@ -105,6 +125,7 @@ def handle_menu():
                "cancel an existing meeting",
                "Save and load",
                "Change meeting",
+               "Compact meetings",
                "quit"]
 
     ui.print_menu("Main menu", options, "quit")
