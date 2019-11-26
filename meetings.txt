@@ -1,5 +1,4 @@
 Your schedule for the day:
- 8 - 9 : wwwwwwww
- 9 - 10 : wwwwwwww
- 10 - 11 : eeeeeeeeeeee
- 11 - 12 : eeeeeeeeeeee
+ 8 - 9 : qqqqqqqqq
+ 9 - 10 : asasas
+ 10 - 11 : rrrrrrrr

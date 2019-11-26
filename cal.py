@@ -3,9 +3,6 @@ import sys
 import ui
 import storage
 
-meetings_dic = {'8': '', '9': '', '10': '', '11': '', '12': '', '13': '', '14': '', '15': '', '16': '',
-                '17': '', '18': ''}
-
 
 def schedule_meeting(meetings_dic):
     input_title = ui.get_inputs(["Enter meeting title: "], "")
@@ -60,7 +57,6 @@ def change_meeting(meetings_dic):
             'Meeting is outside of your working hours (8 to 18)!')
         input_time = ui.get_inputs(
             ["Enter start time: "], "")
-    return meetings_dic
 
     inputs = ui.get_inputs(
         ["Enter meeting title: ", "Enter duration in hours (1 or 2): ", "Enter start time: "], "")
@@ -72,6 +68,7 @@ def change_meeting(meetings_dic):
             elif input_time[0] == i and inputs[1] == '2':
                 meetings_dic[i] = inputs[0]
                 meetings_dic[str(int(i) + 1)] = inputs[0]
+    return meetings_dic
 
 
 def compact_meetings(meetings_dic):
@@ -87,33 +84,31 @@ def compact_meetings(meetings_dic):
     return meetings_dic
 
 
-def choose():
+def choose(meetings_dic):
     inputs = ui.get_inputs(["Please enter an option: "], "")
     option = inputs[0]
 
     if option == "s":
         ui.print_schedule(meetings_dic)
         ui.print_message(' Schedule a new meeting.')
-        schedule_meeting(meetings_dic)
+        meetings_dic = schedule_meeting(meetings_dic)
         ui.print_message(' Meeting added.')
-        print(meetings_dic)
     elif option == "c":
         ui.print_schedule(meetings_dic)
         ui.print_message(' Cancel an existing meeting.')
-        cancel_meeting(meetings_dic)
+        meetings_dic = cancel_meeting(meetings_dic)
         ui.print_message(' Meeting canceled.')
-        print(meetings_dic)
     elif option == "L":
         storage.export_schedule(meetings_dic)
         ui.print_message('\n Exported schedule')
     elif option == "M":
         ui.print_schedule(meetings_dic)
-        change_meeting(meetings_dic)
+        meetings_dic = change_meeting(meetings_dic)
         ui.print_message('\n Changed meeting')
     elif option == "z":
         compact_meetings(meetings_dic)
         ui.print_message('\n Compact meetings')
-        ui.print_schedule(meetings_dic)
+        meetings_dic = ui.print_schedule(meetings_dic)
     elif option == "q":
         sys.exit(0)
     else:
@@ -132,10 +127,12 @@ def handle_menu():
 
 
 def main():
+    meetings_dic = {'8': '', '9': '', '10': '', '11': '', '12': '', '13': '', '14': '', '15': '', '16': '',
+                    '17': '', '18': ''}
     while True:
         handle_menu()
         try:
-            choose()
+            choose(meetings_dic)
         except KeyError as err:
             ui.print_error_message(str(err))
 
